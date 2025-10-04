@@ -123,10 +123,7 @@ dns:
             - +.googleapis.cn
             - +.googleapis.com
             - +.gvt1.com
-
-# 添加 GeoIP 数据库配置
- geodata-mode: true
- geox-url:
+geox-url:
    geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/geoip-only-cn-private.dat"
 proxies:
     - name: 日本域名快速线路01
@@ -189,7 +186,6 @@ proxies:
       password: 20440:d3f4944f
       type: hysteria2
       skip-cert-verify: true
-
 proxy-groups:
     - name: 倚天剑clash
       type: select
@@ -206,7 +202,6 @@ proxy-groups:
         - 美国域名快速线路02
         - 美国ip快速线路01
         - 美国ip快速线路02
-        - DIRECT
     - name: "\U0001F525ChatGPT"
       type: select
       url: https://www.gstatic.com/generate_204
@@ -216,19 +211,7 @@ proxy-groups:
         - 美国域名快速线路02
         - 美国ip快速线路01
         - 美国ip快速线路02
-    - name: 🚀国外网站
-      type: select
-      proxies:
-        - 倚天剑clash
-        - DIRECT
-    - name: 🏠国内网站
-      type: select
-      proxies:
-        - DIRECT
-        - 倚天剑clash
-
 rules:
-    # 本地进程和特殊域名直连
     - DOMAIN,subapi.doggysub.uk,DIRECT
     - PROCESS-NAME,v2ray,DIRECT
     - PROCESS-NAME,xray,DIRECT
@@ -237,533 +220,615 @@ rules:
     - PROCESS-NAME,trojan-go,DIRECT
     - PROCESS-NAME,ss-local,DIRECT
     - PROCESS-NAME,privoxy,DIRECT
-    
-    # 局域网直连
-    - IP-CIDR,192.168.0.0/16,DIRECT
-    - IP-CIDR,10.0.0.0/8,DIRECT
-    - IP-CIDR,172.16.0.0/12,DIRECT
-    - IP-CIDR,127.0.0.0/8,DIRECT
-    
-    # GeoIP 国内直连
-    - GEOIP,CN,🏠国内网站
-    
-    # ChatGPT 相关走专用代理
-    - DOMAIN-SUFFIX,openai.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,chatgpt.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,oaistatic.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,oaiusercontent.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,openai-api.com,\U0001F525ChatGPT
-    
-    # 国内常见域名直连
+    - PROCESS-NAME,leaf,DIRECT
+    - PROCESS-NAME,v2ray.exe,DIRECT
+    - PROCESS-NAME,xray.exe,DIRECT
+    - PROCESS-NAME,naive.exe,DIRECT
+    - PROCESS-NAME,trojan.exe,DIRECT
+    - PROCESS-NAME,trojan-go.exe,DIRECT
+    - PROCESS-NAME,ss-local.exe,DIRECT
+    - PROCESS-NAME,privoxy.exe,DIRECT
+    - PROCESS-NAME,leaf.exe,DIRECT
+    - PROCESS-NAME,Surge,DIRECT
+    - PROCESS-NAME,Surge 2,DIRECT
+    - PROCESS-NAME,Surge 3,DIRECT
+    - PROCESS-NAME,Surge 4,DIRECT
+    - PROCESS-NAME,Surge%202,DIRECT
+    - PROCESS-NAME,Surge%203,DIRECT
+    - PROCESS-NAME,Surge%204,DIRECT
+    - PROCESS-NAME,Thunder,DIRECT
+    - PROCESS-NAME,DownloadService,DIRECT
+    - PROCESS-NAME,qBittorrent,DIRECT
+    - PROCESS-NAME,Transmission,DIRECT
+    - PROCESS-NAME,fdm,DIRECT
+    - PROCESS-NAME,aria2c,DIRECT
+    - PROCESS-NAME,Folx,DIRECT
+    - PROCESS-NAME,NetTransport,DIRECT
+    - PROCESS-NAME,uTorrent,DIRECT
+    - PROCESS-NAME,WebTorrent,DIRECT
+    - PROCESS-NAME,aria2c.exe,DIRECT
+    - PROCESS-NAME,BitComet.exe,DIRECT
+    - PROCESS-NAME,fdm.exe,DIRECT
+    - PROCESS-NAME,NetTransport.exe,DIRECT
+    - PROCESS-NAME,qbittorrent.exe,DIRECT
+    - PROCESS-NAME,Thunder.exe,DIRECT
+    - PROCESS-NAME,ThunderVIP.exe,DIRECT
+    - PROCESS-NAME,transmission-daemon.exe,DIRECT
+    - PROCESS-NAME,transmission-qt.exe,DIRECT
+    - PROCESS-NAME,uTorrent.exe,DIRECT
+    - PROCESS-NAME,WebTorrent.exe,DIRECT
+    - PROCESS-NAME,aDrive.exe,DIRECT
+    - DOMAIN-SUFFIX,services.googleapis.cn,倚天剑clash
+    - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,倚天剑clash
+    - DOMAIN,safebrowsing.urlsec.qq.com,DIRECT
+    - DOMAIN,safebrowsing.googleapis.com,DIRECT
+    - DOMAIN,developer.apple.com,倚天剑clash
+    - DOMAIN-SUFFIX,digicert.com,倚天剑clash
+    - DOMAIN,ocsp.apple.com,倚天剑clash
+    - DOMAIN,ocsp.comodoca.com,倚天剑clash
+    - DOMAIN,ocsp.usertrust.com,倚天剑clash
+    - DOMAIN,ocsp.sectigo.com,倚天剑clash
+    - DOMAIN,ocsp.verisign.net,倚天剑clash
+    - DOMAIN-SUFFIX,apple-dns.net,倚天剑clash
+    - DOMAIN,testflight.apple.com,倚天剑clash
+    - DOMAIN,sandbox.itunes.apple.com,倚天剑clash
+    - DOMAIN,itunes.apple.com,倚天剑clash
+    - DOMAIN-SUFFIX,apps.apple.com,倚天剑clash
+    - DOMAIN-SUFFIX,blobstore.apple.com,倚天剑clash
+    - DOMAIN,cvws.icloud-content.com,倚天剑clash
+    - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+    - DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+    - DOMAIN-SUFFIX,icloud.com,DIRECT
+    - DOMAIN-SUFFIX,icloud-content.com,DIRECT
+    - DOMAIN-SUFFIX,me.com,DIRECT
+    - DOMAIN-SUFFIX,aaplimg.com,DIRECT
+    - DOMAIN-SUFFIX,cdn20.com,DIRECT
+    - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+    - DOMAIN-SUFFIX,akadns.net,DIRECT
+    - DOMAIN-SUFFIX,akamaiedge.net,DIRECT
+    - DOMAIN-SUFFIX,edgekey.net,DIRECT
+    - DOMAIN-SUFFIX,mwcloudcdn.com,DIRECT
+    - DOMAIN-SUFFIX,mwcname.com,DIRECT
+    - DOMAIN-SUFFIX,apple.com,DIRECT
+    - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
+    - DOMAIN-SUFFIX,apple-mapkit.com,DIRECT
+    - "DOMAIN-KEYWORD,chatgpt-async-webps-prod-eastus,\U0001F525ChatGPT"
+    - "DOMAIN,chat.openai.com.cdn.cloudflare.net,\U0001F525ChatGPT"
+    - "DOMAIN,o33249.ingest.sentry.io,\U0001F525ChatGPT"
+    - "DOMAIN,openaiapi-site.azureedge.net,\U0001F525ChatGPT"
+    - "DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,\U0001F525ChatGPT"
+    - "DOMAIN,openaicom.imgix.net,\U0001F525ChatGPT"
+    - "DOMAIN,openaicomproductionae4b.blob.core.windows.net,\U0001F525ChatGPT"
+    - "DOMAIN,production-openaicom-storage.azureedge.net,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,chatgpt.com,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,oaistatic.com,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,oaiusercontent.com,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,openai.com,\U0001F525ChatGPT"
+    - "DOMAIN,api.githubcopilot.com,\U0001F525ChatGPT"
+    - "DOMAIN,copilot-proxy.githubusercontent.com,\U0001F525ChatGPT"
+    - "DOMAIN,copilot.microsoft.com,\U0001F525ChatGPT"
+    - "DOMAIN,sydney.bing.com,\U0001F525ChatGPT"
+    - "DOMAIN,www.bing.com,\U0001F525ChatGPT"
+    - "DOMAIN,bard.google.com,\U0001F525ChatGPT"
+    - "DOMAIN,gemini.google.com,\U0001F525ChatGPT"
+    - "DOMAIN,generativelanguage.googleapis.com,\U0001F525ChatGPT"
+    - "DOMAIN,ai.google.dev,\U0001F525ChatGPT"
+    - "DOMAIN,aida.googleapis.com,\U0001F525ChatGPT"
+    - "DOMAIN,aistudio.google.com,\U0001F525ChatGPT"
+    - "DOMAIN,alkalimakersuite-pa.clients6.google.com,\U0001F525ChatGPT"
+    - "DOMAIN,makersuite.google.com,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,anthropic.com,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,claude.ai,\U0001F525ChatGPT"
+    - "IP-CIDR,160.79.104.0/23,\U0001F525ChatGPT,no-resolve"
+    - "IP-CIDR6,2607:6bc0::/48,\U0001F525ChatGPT,no-resolve"
+    - "DOMAIN-SUFFIX,grazie.ai,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,grazie.aws.intellij.net,\U0001F525ChatGPT"
+    - "DOMAIN,imagine.meta.com,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,meta.ai,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,gemini.google.com,\U0001F525ChatGPT"
+    - "DOMAIN-SUFFIX,google.cn,\U0001F525ChatGPT"
     - DOMAIN-SUFFIX,cn,DIRECT
-    - DOMAIN-SUFFIX,baidu.com,DIRECT
-    - DOMAIN-SUFFIX,qq.com,DIRECT
-    - DOMAIN-SUFFIX,taobao.com,DIRECT
-    - DOMAIN-SUFFIX,alicdn.com,DIRECT
-    - DOMAIN-SUFFIX,weibo.com,DIRECT
-    - DOMAIN-SUFFIX,zhihu.com,DIRECT
-    - DOMAIN-SUFFIX,bilibili.com,DIRECT
-    - DOMAIN-SUFFIX,jd.com,DIRECT
-    - DOMAIN-SUFFIX,163.com,DIRECT
+    - DOMAIN-KEYWORD,-cn,DIRECT
     - DOMAIN-SUFFIX,126.com,DIRECT
-    - DOMAIN-SUFFIX,189.cn,DIRECT
-    - DOMAIN-SUFFIX,10086.cn,DIRECT
-    
-    # 国外常见网站走代理
-    - DOMAIN-SUFFIX,google.com,🚀国外网站
-    - DOMAIN-SUFFIX,youtube.com,🚀国外网站
-    - DOMAIN-SUFFIX,facebook.com,🚀国外网站
-    - DOMAIN-SUFFIX,twitter.com,🚀国外网站
-    - DOMAIN-SUFFIX,instagram.com,🚀国外网站
-    - DOMAIN-SUFFIX,github.com,🚀国外网站
-    - DOMAIN-SUFFIX,githubusercontent.com,🚀国外网站
-    - DOMAIN-SUFFIX,whatsapp.com,🚀国外网站
-    - DOMAIN-SUFFIX,telegram.org,🚀国外网站
-    - DOMAIN-SUFFIX,discord.com,🚀国外网站
-    - DOMAIN-SUFFIX,reddit.com,🚀国外网站
-    - DOMAIN-SUFFIX,netflix.com,🚀国外网站
-    - DOMAIN-SUFFIX,amazon.com,🚀国外网站
-    - DOMAIN-SUFFIX,microsoft.com,🚀国外网站
-    - DOMAIN-SUFFIX,apple.com,🚀国外网站
-    
-    # 最终规则
-    - MATCH,🚀国外网站        - '*.*.xboxlive.com'
-        - speedtest.cros.wr.pvp.net
-        - time.windows.com
-        - time.nist.gov
-        - time.apple.com
-        - time.asia.apple.com
-        - '*.ntp.org.cn'
-        - '*.openwrt.pool.ntp.org'
-        - time1.cloud.tencent.com
-        - time.ustc.edu.cn
-        - pool.ntp.org
-        - ntp.ubuntu.com
-        - ntp.aliyun.com
-        - ntp1.aliyun.com
-        - ntp2.aliyun.com
-        - ntp3.aliyun.com
-        - ntp4.aliyun.com
-        - ntp5.aliyun.com
-        - ntp6.aliyun.com
-        - ntp7.aliyun.com
-        - time1.aliyun.com
-        - time2.aliyun.com
-        - time3.aliyun.com
-        - time4.aliyun.com
-        - time5.aliyun.com
-        - time6.aliyun.com
-        - time7.aliyun.com
-        - '*.time.edu.cn'
-        - time1.apple.com
-        - time2.apple.com
-        - time3.apple.com
-        - time4.apple.com
-        - time5.apple.com
-        - time6.apple.com
-        - time7.apple.com
-        - time1.google.com
-        - time2.google.com
-        - time3.google.com
-        - time4.google.com
-        - music.163.com
-        - '*.music.163.com'
-        - '*.126.net'
-        - musicapi.taihe.com
-        - music.taihe.com
-        - songsearch.kugou.com
-        - trackercdn.kugou.com
-        - '*.kuwo.cn'
-        - api-jooxtt.sanook.com
-        - api.joox.com
-        - joox.com
-        - y.qq.com
-        - '*.y.qq.com'
-        - streamoc.music.tc.qq.com
-        - mobileoc.music.tc.qq.com
-        - isure.stream.qqmusic.qq.com
-        - dl.stream.qqmusic.qq.com
-        - aqqmusic.tc.qq.com
-        - amobile.music.tc.qq.com
-        - '*.xiami.com'
-        - '*.music.migu.cn'
-        - music.migu.cn
-
-    # 国内 DNS
-    nameserver:
-        - https://223.6.6.6/dns-query
-        - https://223.5.5.5/dns-query
-        - https://120.53.53.53/dns-query
-        - https://doh.pub/dns-query
-        - https://dns.alidns.com/dns-query
-
-    # 国外 DNS（通过代理解析）
-    fallback:
-        - https://dns.google/dns-query
-        - https://cloudflare-dns.com/dns-query
-        - https://1.1.1.1/dns-query
-        - tls://1.1.1.1:853
-        - tls://8.8.8.8:853
-
-    # DNS 安全性配置
-    fallback-filter:
-        geoip: true
-        geoip-code: CN
-        ipcidr:
-            - 240.0.0.0/4
-            - 0.0.0.0/32
-            - 127.0.0.1/32
-        domain:
-            - +.google.com
-            - +.facebook.com
-            - +.twitter.com
-            - +.youtube.com
-            - +.xn--ngstr-lra8j.com
-            - +.googleapis.com
-            - +.gvt1.com
-            - +.github.com
-            - +.githubusercontent.com
-
-    # 默认 nameserver
-    default-nameserver:
-        - 223.5.5.5
-        - 119.29.29.29
-        - 114.114.114.114
-
-proxies:
-    - name: 日本域名快速线路01
-      server: jp01.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 日本域名快速线路02
-      server: jp02.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 日本ip快速线路01
-      server: 207.148.102.104
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 日本ip快速线路02
-      server: 45.77.24.51
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 韩国域名快速线路01
-      server: kr01.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 韩国ip快速线路01
-      server: 158.247.217.169
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国域名快速线路01
-      server: us01.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国域名快速线路02
-      server: us02.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国ip快速线路01
-      server: 45.63.62.240
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国ip快速线路02
-      server: 144.202.121.145
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-
-proxy-groups:
-    - name: 倚天剑clash
-      type: select
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-      proxies:
-        - 日本域名快速线路01
-        - 日本域名快速线路02
-        - 日本ip快速线路01
-        - 日本ip快速线路02
-        - 韩国域名快速线路01
-        - 韩国ip快速线路01
-        - 美国域名快速线路01
-        - 美国域名快速线路02
-        - 美国ip快速线路01
-        - 美国ip快速线路02
-        - DIRECT
-    - name: "\U0001F525ChatGPT"
-      type: select
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-      proxies:
-        - 美国域名快速线路01
-        - 美国域名快速线路02
-        - 美国ip快速线路01
-        - 美国ip快速线路02
-    - name: DNS-Proxy
-      type: select
-      proxies:
-        - 美国域名快速线路01
-        - 美国域名快速线路02
-        - DIRECT
-
-rules:
-    # 本地进程直连
-    - DOMAIN,subapi.doggysub.uk,DIRECT
-    - PROCESS-NAME,v2ray,DIRECT
-    - PROCESS-NAME,xray,DIRECT
-    - PROCESS-NAME,naive,DIRECT
-    - PROCESS-NAME,trojan,DIRECT
-    - PROCESS-NAME,trojan-go,DIRECT
-    - PROCESS-NAME,ss-local,DIRECT
-    - PROCESS-NAME,privoxy,DIRECT
-    
-    # DNS 查询通过代理
-    - DST-PORT,53,DNS-Proxy
-    - DST-PORT,853,DNS-Proxy
-    
-    # GeoIP 规则 - 国内直连
-    - GEOIP,CN,DIRECT
-    
-    # 局域网直连
+    - DOMAIN-SUFFIX,126.net,DIRECT
+    - DOMAIN-SUFFIX,127.net,DIRECT
+    - DOMAIN-SUFFIX,163.com,DIRECT
+    - DOMAIN-SUFFIX,360buyimg.com,DIRECT
+    - DOMAIN-SUFFIX,36kr.com,DIRECT
+    - DOMAIN-SUFFIX,acfun.tv,DIRECT
+    - DOMAIN-SUFFIX,air-matters.com,DIRECT
+    - DOMAIN-SUFFIX,aixifan.com,DIRECT
+    - DOMAIN-KEYWORD,alicdn,DIRECT
+    - DOMAIN-KEYWORD,alipay,DIRECT
+    - DOMAIN-KEYWORD,taobao,DIRECT
+    - DOMAIN-SUFFIX,amap.com,DIRECT
+    - DOMAIN-SUFFIX,autonavi.com,DIRECT
+    - DOMAIN-KEYWORD,baidu,DIRECT
+    - DOMAIN-SUFFIX,bdimg.com,DIRECT
+    - DOMAIN-SUFFIX,bdstatic.com,DIRECT
+    - DOMAIN-SUFFIX,bilibili.com,DIRECT
+    - DOMAIN-SUFFIX,bilivideo.com,DIRECT
+    - DOMAIN-SUFFIX,caiyunapp.com,DIRECT
+    - DOMAIN-SUFFIX,clouddn.com,DIRECT
+    - DOMAIN-SUFFIX,cnbeta.com,DIRECT
+    - DOMAIN-SUFFIX,cnbetacdn.com,DIRECT
+    - DOMAIN-SUFFIX,cootekservice.com,DIRECT
+    - DOMAIN-SUFFIX,csdn.net,DIRECT
+    - DOMAIN-SUFFIX,ctrip.com,DIRECT
+    - DOMAIN-SUFFIX,dgtle.com,DIRECT
+    - DOMAIN-SUFFIX,dianping.com,DIRECT
+    - DOMAIN-SUFFIX,douban.com,DIRECT
+    - DOMAIN-SUFFIX,doubanio.com,DIRECT
+    - DOMAIN-SUFFIX,duokan.com,DIRECT
+    - DOMAIN-SUFFIX,easou.com,DIRECT
+    - DOMAIN-SUFFIX,ele.me,DIRECT
+    - DOMAIN-SUFFIX,feng.com,DIRECT
+    - DOMAIN-SUFFIX,fir.im,DIRECT
+    - DOMAIN-SUFFIX,frdic.com,DIRECT
+    - DOMAIN-SUFFIX,g-cores.com,DIRECT
+    - DOMAIN-SUFFIX,godic.net,DIRECT
+    - DOMAIN-SUFFIX,gtimg.com,DIRECT
+    - DOMAIN,cdn.hockeyapp.net,DIRECT
+    - DOMAIN-SUFFIX,hongxiu.com,DIRECT
+    - DOMAIN-SUFFIX,hxcdn.net,DIRECT
+    - DOMAIN-SUFFIX,iciba.com,DIRECT
+    - DOMAIN-SUFFIX,ifeng.com,DIRECT
+    - DOMAIN-SUFFIX,ifengimg.com,DIRECT
+    - DOMAIN-SUFFIX,ipip.net,DIRECT
+    - DOMAIN-SUFFIX,iqiyi.com,DIRECT
+    - DOMAIN-SUFFIX,jd.com,DIRECT
+    - DOMAIN-SUFFIX,jianshu.com,DIRECT
+    - DOMAIN-SUFFIX,knewone.com,DIRECT
+    - DOMAIN-SUFFIX,le.com,DIRECT
+    - DOMAIN-SUFFIX,lecloud.com,DIRECT
+    - DOMAIN-SUFFIX,lemicp.com,DIRECT
+    - DOMAIN-SUFFIX,luoo.net,DIRECT
+    - DOMAIN-SUFFIX,meituan.com,DIRECT
+    - DOMAIN-SUFFIX,meituan.net,DIRECT
+    - DOMAIN-SUFFIX,mi.com,DIRECT
+    - DOMAIN-SUFFIX,miaopai.com,DIRECT
+    - DOMAIN-SUFFIX,microsoft.com,DIRECT
+    - DOMAIN-SUFFIX,microsoftonline.com,DIRECT
+    - DOMAIN-SUFFIX,miui.com,DIRECT
+    - DOMAIN-SUFFIX,miwifi.com,DIRECT
+    - DOMAIN-SUFFIX,mob.com,DIRECT
+    - DOMAIN-SUFFIX,netease.com,DIRECT
+    - DOMAIN-SUFFIX,office.com,DIRECT
+    - DOMAIN-SUFFIX,office365.com,DIRECT
+    - DOMAIN-KEYWORD,officecdn,DIRECT
+    - DOMAIN-SUFFIX,oschina.net,DIRECT
+    - DOMAIN-SUFFIX,ppsimg.com,DIRECT
+    - DOMAIN-SUFFIX,pstatp.com,DIRECT
+    - DOMAIN-SUFFIX,qcloud.com,DIRECT
+    - DOMAIN-SUFFIX,qdaily.com,DIRECT
+    - DOMAIN-SUFFIX,qdmm.com,DIRECT
+    - DOMAIN-SUFFIX,qhimg.com,DIRECT
+    - DOMAIN-SUFFIX,qhres.com,DIRECT
+    - DOMAIN-SUFFIX,qidian.com,DIRECT
+    - DOMAIN-SUFFIX,qihucdn.com,DIRECT
+    - DOMAIN-SUFFIX,qiniu.com,DIRECT
+    - DOMAIN-SUFFIX,qiniucdn.com,DIRECT
+    - DOMAIN-SUFFIX,qiyipic.com,DIRECT
+    - DOMAIN-SUFFIX,qq.com,DIRECT
+    - DOMAIN-SUFFIX,qqurl.com,DIRECT
+    - DOMAIN-SUFFIX,rarbg.to,DIRECT
+    - DOMAIN-SUFFIX,ruguoapp.com,DIRECT
+    - DOMAIN-SUFFIX,segmentfault.com,DIRECT
+    - DOMAIN-SUFFIX,sinaapp.com,DIRECT
+    - DOMAIN-SUFFIX,smzdm.com,DIRECT
+    - DOMAIN-SUFFIX,snapdrop.net,DIRECT
+    - DOMAIN-SUFFIX,sogou.com,DIRECT
+    - DOMAIN-SUFFIX,sogoucdn.com,DIRECT
+    - DOMAIN-SUFFIX,sohu.com,DIRECT
+    - DOMAIN-SUFFIX,soku.com,DIRECT
+    - DOMAIN-SUFFIX,speedtest.net,DIRECT
+    - DOMAIN-SUFFIX,sspai.com,DIRECT
+    - DOMAIN-SUFFIX,suning.com,DIRECT
+    - DOMAIN-SUFFIX,taobao.com,DIRECT
+    - DOMAIN-SUFFIX,tencent.com,DIRECT
+    - DOMAIN-SUFFIX,tenpay.com,DIRECT
+    - DOMAIN-SUFFIX,tianyancha.com,DIRECT
+    - DOMAIN-SUFFIX,tmall.com,DIRECT
+    - DOMAIN-SUFFIX,tudou.com,DIRECT
+    - DOMAIN-SUFFIX,umetrip.com,DIRECT
+    - DOMAIN-SUFFIX,upaiyun.com,DIRECT
+    - DOMAIN-SUFFIX,upyun.com,DIRECT
+    - DOMAIN-SUFFIX,veryzhun.com,DIRECT
+    - DOMAIN-SUFFIX,weather.com,DIRECT
+    - DOMAIN-SUFFIX,weibo.com,DIRECT
+    - DOMAIN-SUFFIX,xiami.com,DIRECT
+    - DOMAIN-SUFFIX,xiami.net,DIRECT
+    - DOMAIN-SUFFIX,xiaomicp.com,DIRECT
+    - DOMAIN-SUFFIX,ximalaya.com,DIRECT
+    - DOMAIN-SUFFIX,xmcdn.com,DIRECT
+    - DOMAIN-SUFFIX,xunlei.com,DIRECT
+    - DOMAIN-SUFFIX,yhd.com,DIRECT
+    - DOMAIN-SUFFIX,yihaodianimg.com,DIRECT
+    - DOMAIN-SUFFIX,yinxiang.com,DIRECT
+    - DOMAIN-SUFFIX,ykimg.com,DIRECT
+    - DOMAIN-SUFFIX,youdao.com,DIRECT
+    - DOMAIN-SUFFIX,youku.com,DIRECT
+    - DOMAIN-SUFFIX,zealer.com,DIRECT
+    - DOMAIN-SUFFIX,zhihu.com,DIRECT
+    - DOMAIN-SUFFIX,zhimg.com,DIRECT
+    - DOMAIN-SUFFIX,zimuzu.tv,DIRECT
+    - DOMAIN-SUFFIX,zoho.com,DIRECT
+    - DOMAIN,fastly-download.epicgames.com,DIRECT
+    - DOMAIN,epicgames-download1.akamaized.net,DIRECT
+    - DOMAIN,steamcdn-a.akamaihd.net,DIRECT
+    - DOMAIN-SUFFIX,steamserver.net,DIRECT
+    - DOMAIN-SUFFIX,cm.steampowered.com,DIRECT
+    - DOMAIN-SUFFIX,synology.com,DIRECT
+    - DOMAIN-SUFFIX,dyndns.org,DIRECT
+    - DOMAIN-SUFFIX,egdownload.fastly-edge.com,DIRECT
+    - DOMAIN-KEYWORD,amazon,倚天剑clash
+    - DOMAIN-KEYWORD,google,倚天剑clash
+    - DOMAIN-KEYWORD,gmail,倚天剑clash
+    - DOMAIN-KEYWORD,youtube,倚天剑clash
+    - DOMAIN-KEYWORD,facebook,倚天剑clash
+    - DOMAIN-SUFFIX,fb.me,倚天剑clash
+    - DOMAIN-SUFFIX,fbcdn.net,倚天剑clash
+    - DOMAIN-KEYWORD,twitter,倚天剑clash
+    - DOMAIN-KEYWORD,instagram,倚天剑clash
+    - DOMAIN-KEYWORD,dropbox,倚天剑clash
+    - DOMAIN-SUFFIX,twimg.com,倚天剑clash
+    - DOMAIN-KEYWORD,blogspot,倚天剑clash
+    - DOMAIN-SUFFIX,youtu.be,倚天剑clash
+    - DOMAIN-KEYWORD,whatsapp,倚天剑clash
+    - DOMAIN-SUFFIX,ipleak.net,倚天剑clash
+    - DOMAIN-SUFFIX,browserscan.net,倚天剑clash
+    - DOMAIN-SUFFIX,surfsharkdns.com,倚天剑clash
+    - DOMAIN-SUFFIX,edns.ip-api.com,倚天剑clash
+    - DOMAIN-SUFFIX,dnsleaktest.com,倚天剑clash
+    - DOMAIN-SUFFIX,dnsleak.com,倚天剑clash
+    - DOMAIN-SUFFIX,expressvpn.com,倚天剑clash
+    - DOMAIN-SUFFIX,nordvpn.com,倚天剑clash
+    - DOMAIN-SUFFIX,surfshark.com,倚天剑clash
+    - DOMAIN-SUFFIX,perfect-privacy.com,倚天剑clash
+    - DOMAIN-SUFFIX,browserleaks.com,倚天剑clash
+    - DOMAIN-SUFFIX,browserleaks.org,倚天剑clash
+    - DOMAIN-SUFFIX,vpnunlimited.com,倚天剑clash
+    - DOMAIN-SUFFIX,whoer.net,倚天剑clash
+    - DOMAIN-SUFFIX,whrq.net,倚天剑clash
+    - DOMAIN-KEYWORD,admarvel,REJECT
+    - DOMAIN-KEYWORD,admaster,REJECT
+    - DOMAIN-KEYWORD,adsage,REJECT
+    - DOMAIN-KEYWORD,adsmogo,REJECT
+    - DOMAIN-KEYWORD,adsrvmedia,REJECT
+    - DOMAIN-KEYWORD,adwords,REJECT
+    - DOMAIN-KEYWORD,adservice,REJECT
+    - DOMAIN-SUFFIX,appsflyer.com,REJECT
+    - DOMAIN-KEYWORD,domob,REJECT
+    - DOMAIN-SUFFIX,doubleclick.net,REJECT
+    - DOMAIN-KEYWORD,duomeng,REJECT
+    - DOMAIN-KEYWORD,dwtrack,REJECT
+    - DOMAIN-KEYWORD,guanggao,REJECT
+    - DOMAIN-KEYWORD,lianmeng,REJECT
+    - DOMAIN-SUFFIX,mmstat.com,REJECT
+    - DOMAIN-KEYWORD,mopub,REJECT
+    - DOMAIN-KEYWORD,omgmta,REJECT
+    - DOMAIN-KEYWORD,openx,REJECT
+    - DOMAIN-KEYWORD,partnerad,REJECT
+    - DOMAIN-KEYWORD,pingfore,REJECT
+    - DOMAIN-KEYWORD,supersonicads,REJECT
+    - DOMAIN-KEYWORD,uedas,REJECT
+    - DOMAIN-KEYWORD,umeng,REJECT
+    - DOMAIN-KEYWORD,usage,REJECT
+    - DOMAIN-SUFFIX,vungle.com,REJECT
+    - DOMAIN-KEYWORD,wlmonitor,REJECT
+    - DOMAIN-KEYWORD,zjtoolbar,REJECT
+    - DOMAIN-SUFFIX,linkedin.com,倚天剑clash
+    - DOMAIN-SUFFIX,licdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,9to5mac.com,倚天剑clash
+    - DOMAIN-SUFFIX,abpchina.org,倚天剑clash
+    - DOMAIN-SUFFIX,adblockplus.org,倚天剑clash
+    - DOMAIN-SUFFIX,adobe.com,倚天剑clash
+    - DOMAIN-SUFFIX,akamaized.net,倚天剑clash
+    - DOMAIN-SUFFIX,alfredapp.com,倚天剑clash
+    - DOMAIN-SUFFIX,amplitude.com,倚天剑clash
+    - DOMAIN-SUFFIX,ampproject.org,倚天剑clash
+    - DOMAIN-SUFFIX,android.com,倚天剑clash
+    - DOMAIN-SUFFIX,angularjs.org,倚天剑clash
+    - DOMAIN-SUFFIX,aolcdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,apkpure.com,倚天剑clash
+    - DOMAIN-SUFFIX,appledaily.com,倚天剑clash
+    - DOMAIN-SUFFIX,appshopper.com,倚天剑clash
+    - DOMAIN-SUFFIX,appspot.com,倚天剑clash
+    - DOMAIN-SUFFIX,arcgis.com,倚天剑clash
+    - DOMAIN-SUFFIX,archive.org,倚天剑clash
+    - DOMAIN-SUFFIX,armorgames.com,倚天剑clash
+    - DOMAIN-SUFFIX,aspnetcdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,att.com,倚天剑clash
+    - DOMAIN-SUFFIX,awsstatic.com,倚天剑clash
+    - DOMAIN-SUFFIX,azurewebsites.net,倚天剑clash
+    - DOMAIN-SUFFIX,bing.com,倚天剑clash
+    - DOMAIN-SUFFIX,bintray.com,倚天剑clash
+    - DOMAIN-SUFFIX,bit.com,倚天剑clash
+    - DOMAIN-SUFFIX,bit.ly,倚天剑clash
+    - DOMAIN-SUFFIX,bitbucket.org,倚天剑clash
+    - DOMAIN-SUFFIX,bjango.com,倚天剑clash
+    - DOMAIN-SUFFIX,bkrtx.com,倚天剑clash
+    - DOMAIN-SUFFIX,blog.com,倚天剑clash
+    - DOMAIN-SUFFIX,blogcdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,blogger.com,倚天剑clash
+    - DOMAIN-SUFFIX,blogsmithmedia.com,倚天剑clash
+    - DOMAIN-SUFFIX,blogspot.com,倚天剑clash
+    - DOMAIN-SUFFIX,blogspot.hk,倚天剑clash
+    - DOMAIN-SUFFIX,bloomberg.com,倚天剑clash
+    - DOMAIN-SUFFIX,box.com,倚天剑clash
+    - DOMAIN-SUFFIX,box.net,倚天剑clash
+    - DOMAIN-SUFFIX,cachefly.net,倚天剑clash
+    - DOMAIN-SUFFIX,chromium.org,倚天剑clash
+    - DOMAIN-SUFFIX,cl.ly,倚天剑clash
+    - DOMAIN-SUFFIX,cloudflare.com,倚天剑clash
+    - DOMAIN-SUFFIX,cloudfront.net,倚天剑clash
+    - DOMAIN-SUFFIX,cloudmagic.com,倚天剑clash
+    - DOMAIN-SUFFIX,cmail19.com,倚天剑clash
+    - DOMAIN-SUFFIX,cnet.com,倚天剑clash
+    - DOMAIN-SUFFIX,cocoapods.org,倚天剑clash
+    - DOMAIN-SUFFIX,comodoca.com,倚天剑clash
+    - DOMAIN-SUFFIX,crashlytics.com,倚天剑clash
+    - DOMAIN-SUFFIX,culturedcode.com,倚天剑clash
+    - DOMAIN-SUFFIX,d.pr,倚天剑clash
+    - DOMAIN-SUFFIX,danilo.to,倚天剑clash
+    - DOMAIN-SUFFIX,dayone.me,倚天剑clash
+    - DOMAIN-SUFFIX,db.tt,倚天剑clash
+    - DOMAIN-SUFFIX,deskconnect.com,倚天剑clash
+    - DOMAIN-SUFFIX,disq.us,倚天剑clash
+    - DOMAIN-SUFFIX,disqus.com,倚天剑clash
+    - DOMAIN-SUFFIX,disquscdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,dnsimple.com,倚天剑clash
+    - DOMAIN-SUFFIX,docker.com,倚天剑clash
+    - DOMAIN-SUFFIX,dribbble.com,倚天剑clash
+    - DOMAIN-SUFFIX,droplr.com,倚天剑clash
+    - DOMAIN-SUFFIX,duckduckgo.com,倚天剑clash
+    - DOMAIN-SUFFIX,dueapp.com,倚天剑clash
+    - DOMAIN-SUFFIX,dytt8.net,倚天剑clash
+    - DOMAIN-SUFFIX,edgecastcdn.net,倚天剑clash
+    - DOMAIN-SUFFIX,edgekey.net,倚天剑clash
+    - DOMAIN-SUFFIX,edgesuite.net,倚天剑clash
+    - DOMAIN-SUFFIX,engadget.com,倚天剑clash
+    - DOMAIN-SUFFIX,entrust.net,倚天剑clash
+    - DOMAIN-SUFFIX,eurekavpt.com,倚天剑clash
+    - DOMAIN-SUFFIX,evernote.com,倚天剑clash
+    - DOMAIN-SUFFIX,fabric.io,倚天剑clash
+    - DOMAIN-SUFFIX,fast.com,倚天剑clash
+    - DOMAIN-SUFFIX,fastly.net,倚天剑clash
+    - DOMAIN-SUFFIX,fc2.com,倚天剑clash
+    - DOMAIN-SUFFIX,feedburner.com,倚天剑clash
+    - DOMAIN-SUFFIX,feedly.com,倚天剑clash
+    - DOMAIN-SUFFIX,feedsportal.com,倚天剑clash
+    - DOMAIN-SUFFIX,fiftythree.com,倚天剑clash
+    - DOMAIN-SUFFIX,firebaseio.com,倚天剑clash
+    - DOMAIN-SUFFIX,flexibits.com,倚天剑clash
+    - DOMAIN-SUFFIX,flickr.com,倚天剑clash
+    - DOMAIN-SUFFIX,flipboard.com,倚天剑clash
+    - DOMAIN-SUFFIX,g.co,倚天剑clash
+    - DOMAIN-SUFFIX,gabia.net,倚天剑clash
+    - DOMAIN-SUFFIX,geni.us,倚天剑clash
+    - DOMAIN-SUFFIX,gfx.ms,倚天剑clash
+    - DOMAIN-SUFFIX,ggpht.com,倚天剑clash
+    - DOMAIN-SUFFIX,ghostnoteapp.com,倚天剑clash
+    - DOMAIN-SUFFIX,git.io,倚天剑clash
+    - DOMAIN-KEYWORD,github,倚天剑clash
+    - DOMAIN-SUFFIX,globalsign.com,倚天剑clash
+    - DOMAIN-SUFFIX,gmodules.com,倚天剑clash
+    - DOMAIN-SUFFIX,godaddy.com,倚天剑clash
+    - DOMAIN-SUFFIX,golang.org,倚天剑clash
+    - DOMAIN-SUFFIX,gongm.in,倚天剑clash
+    - DOMAIN-SUFFIX,goo.gl,倚天剑clash
+    - DOMAIN-SUFFIX,goodreaders.com,倚天剑clash
+    - DOMAIN-SUFFIX,goodreads.com,倚天剑clash
+    - DOMAIN-SUFFIX,gravatar.com,倚天剑clash
+    - DOMAIN-SUFFIX,gstatic.com,倚天剑clash
+    - DOMAIN-SUFFIX,gvt0.com,倚天剑clash
+    - DOMAIN-SUFFIX,hockeyapp.net,倚天剑clash
+    - DOMAIN-SUFFIX,hotmail.com,倚天剑clash
+    - DOMAIN-SUFFIX,icons8.com,倚天剑clash
+    - DOMAIN-SUFFIX,ifixit.com,倚天剑clash
+    - DOMAIN-SUFFIX,ift.tt,倚天剑clash
+    - DOMAIN-SUFFIX,ifttt.com,倚天剑clash
+    - DOMAIN-SUFFIX,iherb.com,倚天剑clash
+    - DOMAIN-SUFFIX,imageshack.us,倚天剑clash
+    - DOMAIN-SUFFIX,img.ly,倚天剑clash
+    - DOMAIN-SUFFIX,imgur.com,倚天剑clash
+    - DOMAIN-SUFFIX,imore.com,倚天剑clash
+    - DOMAIN-SUFFIX,instapaper.com,倚天剑clash
+    - DOMAIN-SUFFIX,ipn.li,倚天剑clash
+    - DOMAIN-SUFFIX,is.gd,倚天剑clash
+    - DOMAIN-SUFFIX,issuu.com,倚天剑clash
+    - DOMAIN-SUFFIX,itgonglun.com,倚天剑clash
+    - DOMAIN-SUFFIX,itun.es,倚天剑clash
+    - DOMAIN-SUFFIX,ixquick.com,倚天剑clash
+    - DOMAIN-SUFFIX,j.mp,倚天剑clash
+    - DOMAIN-SUFFIX,js.revsci.net,倚天剑clash
+    - DOMAIN-SUFFIX,jshint.com,倚天剑clash
+    - DOMAIN-SUFFIX,jtvnw.net,倚天剑clash
+    - DOMAIN-SUFFIX,justgetflux.com,倚天剑clash
+    - DOMAIN-SUFFIX,kat.cr,倚天剑clash
+    - DOMAIN-SUFFIX,klip.me,倚天剑clash
+    - DOMAIN-SUFFIX,libsyn.com,倚天剑clash
+    - DOMAIN-SUFFIX,line-apps.com,倚天剑clash
+    - DOMAIN-SUFFIX,linode.com,倚天剑clash
+    - DOMAIN-SUFFIX,lithium.com,倚天剑clash
+    - DOMAIN-SUFFIX,littlehj.com,倚天剑clash
+    - DOMAIN-SUFFIX,live.com,倚天剑clash
+    - DOMAIN-SUFFIX,live.net,倚天剑clash
+    - DOMAIN-SUFFIX,livefilestore.com,倚天剑clash
+    - DOMAIN-SUFFIX,llnwd.net,倚天剑clash
+    - DOMAIN-SUFFIX,macid.co,倚天剑clash
+    - DOMAIN-SUFFIX,macromedia.com,倚天剑clash
+    - DOMAIN-SUFFIX,macrumors.com,倚天剑clash
+    - DOMAIN-SUFFIX,mashable.com,倚天剑clash
+    - DOMAIN-SUFFIX,mathjax.org,倚天剑clash
+    - DOMAIN-SUFFIX,medium.com,倚天剑clash
+    - DOMAIN-SUFFIX,mega.co.nz,倚天剑clash
+    - DOMAIN-SUFFIX,mega.nz,倚天剑clash
+    - DOMAIN-SUFFIX,megaupload.com,倚天剑clash
+    - DOMAIN-SUFFIX,microsofttranslator.com,倚天剑clash
+    - DOMAIN-SUFFIX,mindnode.com,倚天剑clash
+    - DOMAIN-SUFFIX,mobile01.com,倚天剑clash
+    - DOMAIN-SUFFIX,modmyi.com,倚天剑clash
+    - DOMAIN-SUFFIX,msedge.net,倚天剑clash
+    - DOMAIN-SUFFIX,myfontastic.com,倚天剑clash
+    - DOMAIN-SUFFIX,name.com,倚天剑clash
+    - DOMAIN-SUFFIX,nextmedia.com,倚天剑clash
+    - DOMAIN-SUFFIX,nsstatic.net,倚天剑clash
+    - DOMAIN-SUFFIX,nssurge.com,倚天剑clash
+    - DOMAIN-SUFFIX,nyt.com,倚天剑clash
+    - DOMAIN-SUFFIX,nytimes.com,倚天剑clash
+    - DOMAIN-SUFFIX,omnigroup.com,倚天剑clash
+    - DOMAIN-SUFFIX,onedrive.com,倚天剑clash
+    - DOMAIN-SUFFIX,onenote.com,倚天剑clash
+    - DOMAIN-SUFFIX,ooyala.com,倚天剑clash
+    - DOMAIN-SUFFIX,openvpn.net,倚天剑clash
+    - DOMAIN-SUFFIX,openwrt.org,倚天剑clash
+    - DOMAIN-SUFFIX,orkut.com,倚天剑clash
+    - DOMAIN-SUFFIX,osxdaily.com,倚天剑clash
+    - DOMAIN-SUFFIX,outlook.com,倚天剑clash
+    - DOMAIN-SUFFIX,ow.ly,倚天剑clash
+    - DOMAIN-SUFFIX,paddleapi.com,倚天剑clash
+    - DOMAIN-SUFFIX,parallels.com,倚天剑clash
+    - DOMAIN-SUFFIX,parse.com,倚天剑clash
+    - DOMAIN-SUFFIX,pdfexpert.com,倚天剑clash
+    - DOMAIN-SUFFIX,periscope.tv,倚天剑clash
+    - DOMAIN-SUFFIX,pinboard.in,倚天剑clash
+    - DOMAIN-SUFFIX,pinterest.com,倚天剑clash
+    - DOMAIN-SUFFIX,pixelmator.com,倚天剑clash
+    - DOMAIN-SUFFIX,pixiv.net,倚天剑clash
+    - DOMAIN-SUFFIX,playpcesor.com,倚天剑clash
+    - DOMAIN-SUFFIX,playstation.com,倚天剑clash
+    - DOMAIN-SUFFIX,playstation.com.hk,倚天剑clash
+    - DOMAIN-SUFFIX,playstation.net,倚天剑clash
+    - DOMAIN-SUFFIX,playstationnetwork.com,倚天剑clash
+    - DOMAIN-SUFFIX,pushwoosh.com,倚天剑clash
+    - DOMAIN-SUFFIX,rime.im,倚天剑clash
+    - DOMAIN-SUFFIX,servebom.com,倚天剑clash
+    - DOMAIN-SUFFIX,sfx.ms,倚天剑clash
+    - DOMAIN-SUFFIX,shadowsocks.org,倚天剑clash
+    - DOMAIN-SUFFIX,sharethis.com,倚天剑clash
+    - DOMAIN-SUFFIX,shazam.com,倚天剑clash
+    - DOMAIN-SUFFIX,skype.com,倚天剑clash
+    - DOMAIN-SUFFIX,smartdns倚天剑clash.com,倚天剑clash
+    - DOMAIN-SUFFIX,smartmailcloud.com,倚天剑clash
+    - DOMAIN-SUFFIX,sndcdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,sony.com,倚天剑clash
+    - DOMAIN-SUFFIX,soundcloud.com,倚天剑clash
+    - DOMAIN-SUFFIX,sourceforge.net,倚天剑clash
+    - DOMAIN-SUFFIX,spotify.com,倚天剑clash
+    - DOMAIN-SUFFIX,squarespace.com,倚天剑clash
+    - DOMAIN-SUFFIX,sstatic.net,倚天剑clash
+    - DOMAIN-SUFFIX,st.luluku.pw,倚天剑clash
+    - DOMAIN-SUFFIX,stackoverflow.com,倚天剑clash
+    - DOMAIN-SUFFIX,startpage.com,倚天剑clash
+    - DOMAIN-SUFFIX,staticflickr.com,倚天剑clash
+    - DOMAIN-SUFFIX,steamcommunity.com,倚天剑clash
+    - DOMAIN-SUFFIX,symauth.com,倚天剑clash
+    - DOMAIN-SUFFIX,symcb.com,倚天剑clash
+    - DOMAIN-SUFFIX,symcd.com,倚天剑clash
+    - DOMAIN-SUFFIX,tapbots.com,倚天剑clash
+    - DOMAIN-SUFFIX,tapbots.net,倚天剑clash
+    - DOMAIN-SUFFIX,tdesktop.com,倚天剑clash
+    - DOMAIN-SUFFIX,techcrunch.com,倚天剑clash
+    - DOMAIN-SUFFIX,techsmith.com,倚天剑clash
+    - DOMAIN-SUFFIX,thepiratebay.org,倚天剑clash
+    - DOMAIN-SUFFIX,theverge.com,倚天剑clash
+    - DOMAIN-SUFFIX,time.com,倚天剑clash
+    - DOMAIN-SUFFIX,timeinc.net,倚天剑clash
+    - DOMAIN-SUFFIX,tiny.cc,倚天剑clash
+    - DOMAIN-SUFFIX,tinypic.com,倚天剑clash
+    - DOMAIN-SUFFIX,tmblr.co,倚天剑clash
+    - DOMAIN-SUFFIX,todoist.com,倚天剑clash
+    - DOMAIN-SUFFIX,trello.com,倚天剑clash
+    - DOMAIN-SUFFIX,trustasiassl.com,倚天剑clash
+    - DOMAIN-SUFFIX,tumblr.co,倚天剑clash
+    - DOMAIN-SUFFIX,tumblr.com,倚天剑clash
+    - DOMAIN-SUFFIX,tweetdeck.com,倚天剑clash
+    - DOMAIN-SUFFIX,tweetmarker.net,倚天剑clash
+    - DOMAIN-SUFFIX,twitch.tv,倚天剑clash
+    - DOMAIN-SUFFIX,txmblr.com,倚天剑clash
+    - DOMAIN-SUFFIX,typekit.net,倚天剑clash
+    - DOMAIN-SUFFIX,ubertags.com,倚天剑clash
+    - DOMAIN-SUFFIX,ublock.org,倚天剑clash
+    - DOMAIN-SUFFIX,ubnt.com,倚天剑clash
+    - DOMAIN-SUFFIX,ulyssesapp.com,倚天剑clash
+    - DOMAIN-SUFFIX,urchin.com,倚天剑clash
+    - DOMAIN-SUFFIX,usertrust.com,倚天剑clash
+    - DOMAIN-SUFFIX,v.gd,倚天剑clash
+    - DOMAIN-SUFFIX,v2ex.com,倚天剑clash
+    - DOMAIN-SUFFIX,vimeo.com,倚天剑clash
+    - DOMAIN-SUFFIX,vimeocdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,vine.co,倚天剑clash
+    - DOMAIN-SUFFIX,vivaldi.com,倚天剑clash
+    - DOMAIN-SUFFIX,vox-cdn.com,倚天剑clash
+    - DOMAIN-SUFFIX,vsco.co,倚天剑clash
+    - DOMAIN-SUFFIX,vultr.com,倚天剑clash
+    - DOMAIN-SUFFIX,w.org,倚天剑clash
+    - DOMAIN-SUFFIX,w3schools.com,倚天剑clash
+    - DOMAIN-SUFFIX,webtype.com,倚天剑clash
+    - DOMAIN-SUFFIX,wikiwand.com,倚天剑clash
+    - DOMAIN-SUFFIX,wikileaks.org,倚天剑clash
+    - DOMAIN-SUFFIX,wikimedia.org,倚天剑clash
+    - DOMAIN-SUFFIX,wikipedia.com,倚天剑clash
+    - DOMAIN-SUFFIX,wikipedia.org,倚天剑clash
+    - DOMAIN-SUFFIX,windows.com,倚天剑clash
+    - DOMAIN-SUFFIX,windows.net,倚天剑clash
+    - DOMAIN-SUFFIX,wire.com,倚天剑clash
+    - DOMAIN-SUFFIX,wordpress.com,倚天剑clash
+    - DOMAIN-SUFFIX,workflowy.com,倚天剑clash
+    - DOMAIN-SUFFIX,wp.com,倚天剑clash
+    - DOMAIN-SUFFIX,wsj.com,倚天剑clash
+    - DOMAIN-SUFFIX,wsj.net,倚天剑clash
+    - DOMAIN-SUFFIX,xda-developers.com,倚天剑clash
+    - DOMAIN-SUFFIX,xeeno.com,倚天剑clash
+    - DOMAIN-SUFFIX,xiti.com,倚天剑clash
+    - DOMAIN-SUFFIX,yahoo.com,倚天剑clash
+    - DOMAIN-SUFFIX,yimg.com,倚天剑clash
+    - DOMAIN-SUFFIX,ying.com,倚天剑clash
+    - DOMAIN-SUFFIX,yoyo.org,倚天剑clash
+    - DOMAIN-SUFFIX,ytimg.com,倚天剑clash
+    - DOMAIN-SUFFIX,signal.org,倚天剑clash
+    - DOMAIN-SUFFIX,whispersystems.org,倚天剑clash
+    - DOMAIN-SUFFIX,cangku.moe,倚天剑clash
+    - DOMAIN-SUFFIX,tradingview.com,倚天剑clash
+    - DOMAIN-SUFFIX,telegra.ph,倚天剑clash
+    - DOMAIN-SUFFIX,telegram.org,倚天剑clash
+    - IP-CIDR,91.108.4.0/22,倚天剑clash,no-resolve
+    - IP-CIDR,91.108.8.0/21,倚天剑clash,no-resolve
+    - IP-CIDR,91.108.16.0/22,倚天剑clash,no-resolve
+    - IP-CIDR,91.108.56.0/22,倚天剑clash,no-resolve
+    - IP-CIDR,149.154.160.0/20,倚天剑clash,no-resolve
+    - IP-CIDR6,2001:67c:4e8::/48,倚天剑clash,no-resolve
+    - IP-CIDR6,2001:b28:f23d::/48,倚天剑clash,no-resolve
+    - IP-CIDR6,2001:b28:f23f::/48,倚天剑clash,no-resolve
+    - IP-CIDR,120.232.181.162/32,倚天剑clash,no-resolve
+    - IP-CIDR,120.241.147.226/32,倚天剑clash,no-resolve
+    - IP-CIDR,120.253.253.226/32,倚天剑clash,no-resolve
+    - IP-CIDR,120.253.255.162/32,倚天剑clash,no-resolve
+    - IP-CIDR,120.253.255.34/32,倚天剑clash,no-resolve
+    - IP-CIDR,120.253.255.98/32,倚天剑clash,no-resolve
+    - IP-CIDR,180.163.150.162/32,倚天剑clash,no-resolve
+    - IP-CIDR,180.163.150.34/32,倚天剑clash,no-resolve
+    - IP-CIDR,180.163.151.162/32,倚天剑clash,no-resolve
+    - IP-CIDR,180.163.151.34/32,倚天剑clash,no-resolve
+    - IP-CIDR,203.208.39.0/24,倚天剑clash,no-resolve
+    - IP-CIDR,203.208.40.0/24,倚天剑clash,no-resolve
+    - IP-CIDR,203.208.41.0/24,倚天剑clash,no-resolve
+    - IP-CIDR,203.208.43.0/24,倚天剑clash,no-resolve
+    - IP-CIDR,203.208.50.0/24,倚天剑clash,no-resolve
+    - IP-CIDR,220.181.174.162/32,倚天剑clash,no-resolve
+    - IP-CIDR,220.181.174.226/32,倚天剑clash,no-resolve
+    - IP-CIDR,220.181.174.34/32,倚天剑clash,no-resolve
+    - DOMAIN,injections.adguard.org,DIRECT
+    - DOMAIN,local.adguard.org,DIRECT
+    - DOMAIN-SUFFIX,local,DIRECT
+    - IP-CIDR,127.0.0.0/8,DIRECT
+    - IP-CIDR,172.16.0.0/12,DIRECT
     - IP-CIDR,192.168.0.0/16,DIRECT
     - IP-CIDR,10.0.0.0/8,DIRECT
-    - IP-CIDR,172.16.0.0/12,DIRECT
-    - IP-CIDR,127.0.0.0/8,DIRECT
-    
-    # ChatGPT 相关走专用代理
-    - DOMAIN-SUFFIX,openai.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,chatgpt.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,oaistatic.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,oaiusercontent.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,openai-api.com,\U0001F525ChatGPT
-    
-    # 国外网站走代理
-    - DOMAIN-SUFFIX,google.com,倚天剑clash
-    - DOMAIN-SUFFIX,youtube.com,倚天剑clash
-    - DOMAIN-SUFFIX,facebook.com,倚天剑clash
-    - DOMAIN-SUFFIX,twitter.com,倚天剑clash
-    - DOMAIN-SUFFIX,instagram.com,倚天剑clash
-    - DOMAIN-SUFFIX,github.com,倚天剑clash
-    - DOMAIN-SUFFIX,githubusercontent.com,倚天剑clash
-    
-    # 最终规则
-    - MATCH,倚天剑clash        # NTP 时间服务器
-        - time.windows.com
-        - time.nist.gov
-        - time.apple.com
-        - time.asia.apple.com
-        - '*.ntp.org.cn'
-        - '*.openwrt.pool.ntp.org'
-        - time1.cloud.tencent.com
-        - time.ustc.edu.cn
-        - pool.ntp.org
-        - ntp.ubuntu.com
-        - ntp.aliyun.com
-        - ntp1.aliyun.com
-        - ntp2.aliyun.com
-        - ntp3.aliyun.com
-        - ntp4.aliyun.com
-        - ntp5.aliyun.com
-        - ntp6.aliyun.com
-        - ntp7.aliyun.com
-        - time1.aliyun.com
-        - time2.aliyun.com
-        - time3.aliyun.com
-        - time4.aliyun.com
-        - time5.aliyun.com
-        - time6.aliyun.com
-        - time7.aliyun.com
-        - '*.time.edu.cn'
-        - time1.apple.com
-        - time2.apple.com
-        - time3.apple.com
-        - time4.apple.com
-        - time5.apple.com
-        - time6.apple.com
-        - time7.apple.com
-        - time1.google.com
-        - time2.google.com
-        - time3.google.com
-        - time4.google.com
-        
-        # 音乐服务
-        - music.163.com
-        - '*.music.163.com'
-        - '*.126.net'
-        - musicapi.taihe.com
-        - music.taihe.com
-        - songsearch.kugou.com
-        - trackercdn.kugou.com
-        - '*.kuwo.cn'
-        - api-jooxtt.sanook.com
-        - api.joox.com
-        - joox.com
-        - y.qq.com
-        - '*.y.qq.com'
-        - streamoc.music.tc.qq.com
-        - mobileoc.music.tc.qq.com
-        - isure.stream.qqmusic.qq.com
-        - dl.stream.qqmusic.qq.com
-        - aqqmusic.tc.qq.com
-        - amobile.music.tc.qq.com
-        - '*.xiami.com'
-        - '*.music.migu.cn'
-        - music.migu.cn
-
-    # 国内 DNS，用于国内域名解析
-    nameserver:
-        - https://223.6.6.6/dns-query#h3=true
-        - https://223.5.5.5/dns-query#h3=true
-        - https://120.53.53.53/dns-query
-        - https://doh.pub/dns-query
-        - https://dns.alidns.com/dns-query
-
-    # 国外 DNS，通过代理进行解析
-    fallback:
-        - https://000000.dns.nextdns.io/dns-query#h3=true
-        - https://101.101.101.101/dns-query
-        - https://208.67.220.220/dns-query
-        - https://dns.rubyfish.cn/dns-query
-        - tls://8.8.4.4
-        - tls://1.0.0.1:853
-        - https://cloudflare-dns.com/dns-query
-        - https://dns.google/dns-query
-
-    # DNS 安全性配置
-    fallback-filter:
-        geoip: true
-        geoip-code: CN  # 使用 GeoIP 数据库识别中国 IP
-        ipcidr:
-            - 240.0.0.0/4
-            - 0.0.0.0/32
-            - 127.0.0.1/32
-            - 10.0.0.0/8
-            - 172.16.0.0/12
-            - 192.168.0.0/16
-        domain:
-            - +.google.com
-            - +.facebook.com
-            - +.twitter.com
-            - +.youtube.com
-            - +.xn--ngstr-lra8j.com
-            - +.google.cn
-            - +.googleapis.cn
-            - +.googleapis.com
-            - +.gvt1.com
-            - +.amazonaws.com
-            - +.cloudfront.net
-            - +.akamai.net
-
-    # 代理 DNS（通过代理服务器进行 DNS 查询）
-    proxy-server-nameserver:
-        - https://dns.google/dns-query
-        - https://cloudflare-dns.com/dns-query
-        - tls://1.1.1.1:853
-
-    # 默认 nameserver
-    default-nameserver:
-        - 180.76.76.76
-        - 223.6.6.6
-        - 119.29.29.29
-        - 114.114.114.114
-
-proxies:
-    - name: 日本域名快速线路01
-      server: jp01.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 日本域名快速线路02
-      server: jp02.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 日本ip快速线路01
-      server: 207.148.102.104
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 日本ip快速线路02
-      server: 45.77.24.51
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 韩国域名快速线路01
-      server: kr01.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 韩国ip快速线路01
-      server: 158.247.217.169
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国域名快速线路01
-      server: us01.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国域名快速线路02
-      server: us02.hys.vipssr.top
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国ip快速线路01
-      server: 45.63.62.240
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-    - name: 美国ip快速线路02
-      server: 144.202.121.145
-      port: 443
-      password: 20440:d3f4944f
-      type: hysteria2
-      skip-cert-verify: true
-
-proxy-groups:
-    - name: 倚天剑clash
-      type: select
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-      proxies:
-        - 日本域名快速线路01
-        - 日本域名快速线路02
-        - 日本ip快速线路01
-        - 日本ip快速线路02
-        - 韩国域名快速线路01
-        - 韩国ip快速线路01
-        - 美国域名快速线路01
-        - 美国域名快速线路02
-        - 美国ip快速线路01
-        - 美国ip快速线路02
-    - name: "\U0001F525ChatGPT"
-      type: select
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-      proxies:
-        - 美国域名快速线路01
-        - 美国域名快速线路02
-        - 美国ip快速线路01
-        - 美国ip快速线路02
-    # 添加 DNS 代理组
-    - name: DNS-Proxied
-      type: select
-      proxies:
-        - 美国域名快速线路01
-        - 美国域名快速线路02
-        - DIRECT
-
-rules:
-    # 本地进程直连
-    - DOMAIN,subapi.doggysub.uk,DIRECT
-    - PROCESS-NAME,v2ray,DIRECT
-    - PROCESS-NAME,xray,DIRECT
-    - PROCESS-NAME,naive,DIRECT
-    - PROCESS-NAME,trojan,DIRECT
-    - PROCESS-NAME,trojan-go,DIRECT
-    - PROCESS-NAME,ss-local,DIRECT
-    - PROCESS-NAME,privoxy,DIRECT
-    
-    # DNS 查询通过代理（确保 DNS 根据代理 IP 递归解析）
-    - DST-PORT,53,DNS-Proxied
-    
-    # GeoIP 规则 - 国内直连
-    - GEOIP,private,DIRECT
-    - GEOIP,cn,DIRECT
-    
-    # ChatGPT 相关走专用代理
-    - DOMAIN-SUFFIX,openai.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,chatgpt.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,oaistatic.com,\U0001F525ChatGPT
-    - DOMAIN-SUFFIX,oaiusercontent.com,\U0001F525ChatGPT
-    
-    # 最终规则
+    - IP-CIDR,17.0.0.0/8,DIRECT
+    - IP-CIDR,100.64.0.0/10,DIRECT
+    - IP-CIDR,224.0.0.0/4,DIRECT
+    - IP-CIDR6,fe80::/10,DIRECT
+    - GEOIP,CN,DIRECT
     - MATCH,倚天剑clash
