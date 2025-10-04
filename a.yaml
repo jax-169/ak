@@ -1,0 +1,277 @@
+mixed-port: 7896
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9097
+unified-delay: true
+profile:
+    store-selected: true
+
+# GeoIP 数据库配置
+geodata-mode: true
+geox-url:
+  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/geoip-only-cn-private.dat"
+
+tun:
+    mtu: 1500
+
+dns:
+    enable: true
+    listen: 127.0.0.1:5335
+    ipv6: true
+    
+    # 使用 fake-ip 模式，支持根据代理 IP 递归解析
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    fake-ip-filter:
+        - '*.lan'
+        - localhost.ptlogin2.qq.com
+        - '*.msftconnecttest.com'
+        - '*.msftncsi.com'
+        - '*.ipv6.microsoft.com'
+        - '*.*.*.srv.nintendo.net'
+        - '*.*.stun.playstation.net'
+        - xbox.*.*.microsoft.com
+        - '*.*.xboxlive.com'
+        - speedtest.cros.wr.pvp.net
+        
+        # NTP 时间服务器
+        - time.windows.com
+        - time.nist.gov
+        - time.apple.com
+        - time.asia.apple.com
+        - '*.ntp.org.cn'
+        - '*.openwrt.pool.ntp.org'
+        - time1.cloud.tencent.com
+        - time.ustc.edu.cn
+        - pool.ntp.org
+        - ntp.ubuntu.com
+        - ntp.aliyun.com
+        - ntp1.aliyun.com
+        - ntp2.aliyun.com
+        - ntp3.aliyun.com
+        - ntp4.aliyun.com
+        - ntp5.aliyun.com
+        - ntp6.aliyun.com
+        - ntp7.aliyun.com
+        - time1.aliyun.com
+        - time2.aliyun.com
+        - time3.aliyun.com
+        - time4.aliyun.com
+        - time5.aliyun.com
+        - time6.aliyun.com
+        - time7.aliyun.com
+        - '*.time.edu.cn'
+        - time1.apple.com
+        - time2.apple.com
+        - time3.apple.com
+        - time4.apple.com
+        - time5.apple.com
+        - time6.apple.com
+        - time7.apple.com
+        - time1.google.com
+        - time2.google.com
+        - time3.google.com
+        - time4.google.com
+        
+        # 音乐服务
+        - music.163.com
+        - '*.music.163.com'
+        - '*.126.net'
+        - musicapi.taihe.com
+        - music.taihe.com
+        - songsearch.kugou.com
+        - trackercdn.kugou.com
+        - '*.kuwo.cn'
+        - api-jooxtt.sanook.com
+        - api.joox.com
+        - joox.com
+        - y.qq.com
+        - '*.y.qq.com'
+        - streamoc.music.tc.qq.com
+        - mobileoc.music.tc.qq.com
+        - isure.stream.qqmusic.qq.com
+        - dl.stream.qqmusic.qq.com
+        - aqqmusic.tc.qq.com
+        - amobile.music.tc.qq.com
+        - '*.xiami.com'
+        - '*.music.migu.cn'
+        - music.migu.cn
+
+    # 国内 DNS，用于国内域名解析
+    nameserver:
+        - https://223.6.6.6/dns-query#h3=true
+        - https://223.5.5.5/dns-query#h3=true
+        - https://120.53.53.53/dns-query
+        - https://doh.pub/dns-query
+        - https://dns.alidns.com/dns-query
+
+    # 国外 DNS，通过代理进行解析
+    fallback:
+        - https://000000.dns.nextdns.io/dns-query#h3=true
+        - https://101.101.101.101/dns-query
+        - https://208.67.220.220/dns-query
+        - https://dns.rubyfish.cn/dns-query
+        - tls://8.8.4.4
+        - tls://1.0.0.1:853
+        - https://cloudflare-dns.com/dns-query
+        - https://dns.google/dns-query
+
+    # DNS 安全性配置
+    fallback-filter:
+        geoip: true
+        geoip-code: CN  # 使用 GeoIP 数据库识别中国 IP
+        ipcidr:
+            - 240.0.0.0/4
+            - 0.0.0.0/32
+            - 127.0.0.1/32
+            - 10.0.0.0/8
+            - 172.16.0.0/12
+            - 192.168.0.0/16
+        domain:
+            - +.google.com
+            - +.facebook.com
+            - +.twitter.com
+            - +.youtube.com
+            - +.xn--ngstr-lra8j.com
+            - +.google.cn
+            - +.googleapis.cn
+            - +.googleapis.com
+            - +.gvt1.com
+            - +.amazonaws.com
+            - +.cloudfront.net
+            - +.akamai.net
+
+    # 代理 DNS（通过代理服务器进行 DNS 查询）
+    proxy-server-nameserver:
+        - https://dns.google/dns-query
+        - https://cloudflare-dns.com/dns-query
+        - tls://1.1.1.1:853
+
+    # 默认 nameserver
+    default-nameserver:
+        - 180.76.76.76
+        - 223.6.6.6
+        - 119.29.29.29
+        - 114.114.114.114
+
+proxies:
+    - name: 日本域名快速线路01
+      server: jp01.hys.vipssr.top
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 日本域名快速线路02
+      server: jp02.hys.vipssr.top
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 日本ip快速线路01
+      server: 207.148.102.104
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 日本ip快速线路02
+      server: 45.77.24.51
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 韩国域名快速线路01
+      server: kr01.hys.vipssr.top
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 韩国ip快速线路01
+      server: 158.247.217.169
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 美国域名快速线路01
+      server: us01.hys.vipssr.top
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 美国域名快速线路02
+      server: us02.hys.vipssr.top
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 美国ip快速线路01
+      server: 45.63.62.240
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+    - name: 美国ip快速线路02
+      server: 144.202.121.145
+      port: 443
+      password: 20440:d3f4944f
+      type: hysteria2
+      skip-cert-verify: true
+
+proxy-groups:
+    - name: 倚天剑clash
+      type: select
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      proxies:
+        - 日本域名快速线路01
+        - 日本域名快速线路02
+        - 日本ip快速线路01
+        - 日本ip快速线路02
+        - 韩国域名快速线路01
+        - 韩国ip快速线路01
+        - 美国域名快速线路01
+        - 美国域名快速线路02
+        - 美国ip快速线路01
+        - 美国ip快速线路02
+    - name: "\U0001F525ChatGPT"
+      type: select
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      proxies:
+        - 美国域名快速线路01
+        - 美国域名快速线路02
+        - 美国ip快速线路01
+        - 美国ip快速线路02
+    # 添加 DNS 代理组
+    - name: DNS-Proxied
+      type: select
+      proxies:
+        - 美国域名快速线路01
+        - 美国域名快速线路02
+        - DIRECT
+
+rules:
+    # 本地进程直连
+    - DOMAIN,subapi.doggysub.uk,DIRECT
+    - PROCESS-NAME,v2ray,DIRECT
+    - PROCESS-NAME,xray,DIRECT
+    - PROCESS-NAME,naive,DIRECT
+    - PROCESS-NAME,trojan,DIRECT
+    - PROCESS-NAME,trojan-go,DIRECT
+    - PROCESS-NAME,ss-local,DIRECT
+    - PROCESS-NAME,privoxy,DIRECT
+    
+    # DNS 查询通过代理（确保 DNS 根据代理 IP 递归解析）
+    - DST-PORT,53,DNS-Proxied
+    
+    # GeoIP 规则 - 国内直连
+    - GEOIP,private,DIRECT
+    - GEOIP,cn,DIRECT
+    
+    # ChatGPT 相关走专用代理
+    - DOMAIN-SUFFIX,openai.com,\U0001F525ChatGPT
+    - DOMAIN-SUFFIX,chatgpt.com,\U0001F525ChatGPT
+    - DOMAIN-SUFFIX,oaistatic.com,\U0001F525ChatGPT
+    - DOMAIN-SUFFIX,oaiusercontent.com,\U0001F525ChatGPT
+    
+    # 最终规则
+    - MATCH,倚天剑clash
