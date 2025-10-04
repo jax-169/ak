@@ -125,10 +125,9 @@ dns:
             - +.gvt1.com
 
 # 添加 GeoIP 数据库配置
-geodata-mode: true
-geox-url:
-  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/geoip-only-cn-private.dat"
-
+ geodata-mode: true
+ geox-url:
+   geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/geoip-only-cn-private.dat"
 proxies:
     - name: 日本域名快速线路01
       server: jp01.hys.vipssr.top
